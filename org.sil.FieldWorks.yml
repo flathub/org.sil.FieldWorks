@@ -55,7 +55,13 @@ finish-args:
   # gloss field. This feature uses the desktop environment's list of defined
   # keyboard input methods, as well as notifying the desktop environment about
   # what keyboard was switched to.
+  # Allow interacting with Gnome Shell keyboard switcher.
   - --talk-name=org.gnome.Shell
+  # Allow launching of keyboard configuration tools, such as Keyman
+  # Configration, and gnome-control-center to the input sources area.
+  # Allow querying ibus preload-engines list of keyboards.
+  # Allow applying user keyboard mapping modifications.
+  - --talk-name=org.freedesktop.Flatpak
   # FieldWorks uses FlexBridge to synchronize data over the network or by USB
   # Flash Drives. FlexBridge queries for avaliable USB Flash Drives using
   # the system bus.
@@ -115,7 +121,7 @@ modules:
         dest: fw
         url: https://github.com/sillsdev/FieldWorks.git
         # Branch support/9.0
-        commit: 901fb46b83b422a00af3e8e6cec1c7aad01cf9a9
+        commit: 89ee3cced8cb723d75768f3ad2e6e2e95ca6700c
       - type: git
         # liblcm is cloned for use during localization. But the actual liblcm
         # assemblies used are fetched separately.
@@ -142,8 +148,8 @@ modules:
         tag: FieldWorks9.0.17
         commit: 6d09370772ecd99f3efbe776c55c6561d1b7af88
       - type: file
-        url: https://github.com/sillsdev/FwLocalizations/releases/download/v9.0.17-14-g37c0f8f/crowdin.zip
-        sha512: 08586f7479d5c99d668d4ec92a1824e02f2982683abf3d13549e07dc1378eaf1204547a1ce6cf9a29f4a9ee418aeaf558e00a13e25e9bd41a0de880a20de1f39
+        url: https://github.com/sillsdev/FwLocalizations/releases/download/v9.1.9-beta-2-g5e94970/crowdin.zip
+        sha512: 84e809b7452e6b16d9a44c21080da4ef5a7eb6d6613f2702bb131400ddf0197446cc2382c51147fd423838de7fed71797fbe05b1b4e4e0d5a2819e3c16916f9f
         dest: fw/Downloads/
         dest-filename: Crowdin.zip
       # FW nuget dependencies
@@ -652,9 +658,9 @@ modules:
               </configuration>
           # Regenerate: Set flexbridge git dir to newer code. Then run (in the
           # directory with the flatpak manifest):
-          #   .../flatpak-builder-tools/dotnet/flatpak-dotnet-generator.py flexbridge-sources-nuget.json $(find $HOME/fwrepo/flexbridge -name \*.csproj -o -name \*.proj)
-          # Also, to work with FW 9.0, FW needs geckofx45 not 60.
-          - flexbridge-sources-nuget.json
+          #   .../flatpak-builder-tools/dotnet/flatpak-dotnet-generator.py flexbridge-sources-nuget.yml $(find $HOME/fwrepo/flexbridge -name \*.csproj -o -name \*.proj)
+          # Also, to work with FW 9.0 which uses geckofx45, adjust the output to use geckofx45 rather than 60.
+          - flexbridge-sources-nuget.yml
           # Dependencies specified from FLExBridge.dep
           # Determine what is needed by running in the flexbridge repo:
           #   msbuild -t:DownloadDependencies build/FLExBridge.proj && cat build/FLExBridge.files
