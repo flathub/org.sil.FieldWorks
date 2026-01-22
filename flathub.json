@@ -1,5 +1,6 @@
 {
   "only-arches": ["x86_64"],
   "//": "Skipping validation which does not yet recognize license OFL-1.1-RFN.",
-  "skip-appstream-check": true
+  "skip-appstream-check": true,
+  "end-of-life": "This application is no longer maintained."
 }
